@@ -9,10 +9,12 @@ build:
     push: false
   artifacts:
     - image: pedrokohler/ticketing-auth
-      context: microservices-ticketing-auth
+      context: auth
       docker:
         dockerfile: Dockerfile
       sync:
         manual:
           - src: 'src/**/*.ts'
+            dest: .
+          - src: 'dist/**/*'
             dest: .
