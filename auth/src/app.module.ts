@@ -5,6 +5,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PasswordModule } from './password/password.module';
 import { UserProvider } from './schemas/user.provider';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { UserProvider } from './schemas/user.provider';
       useCreateIndex: true,
     }),
     MongooseModule.forFeatureAsync([UserProvider]),
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [
