@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { PasswordModule } from './password/password.module';
+import { UserProvider } from './schemas/user.provider';
 
 @Module({
   imports: [
@@ -13,6 +14,7 @@ import { PasswordModule } from './password/password.module';
       useUnifiedTopology: true,
       useCreateIndex: true,
     }),
+    MongooseModule.forFeatureAsync([UserProvider]),
   ],
   controllers: [AppController],
   providers: [

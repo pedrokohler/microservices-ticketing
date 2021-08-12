@@ -10,6 +10,6 @@ POST http://ticketing.dev/api/users/sign-up
 Content-Type: application/json
 
 {
-  "email": "pedrokohler@gmail.com",
+  "email": "pedrokohler1@gmail.com",
   "password": "123456789"
 }

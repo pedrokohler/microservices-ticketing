@@ -1,6 +1,7 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, ConflictException, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { UserSignUpDto } from './dtos/user-sign-up.dto';
+import { User } from './schemas/user.schema';
 
 @Controller('api/users')
 export class AppController {
@@ -8,22 +9,25 @@ export class AppController {
 
   @Post('/sign-in')
   signIn(): string {
-    return this.appService.getHello();
+    return 'Hello World!';
   }
 
   @Post('/sign-out')
   signOut(): string {
-    return this.appService.getHello();
+    return 'Hello World!';
   }
 
   @Post('/sign-up')
-  signUp(@Body() userSignUpDto: UserSignUpDto): string {
-    console.log("Creating user")
-    return this.appService.getHello();
+  async signUp(@Body() userSignUpDto: UserSignUpDto): Promise<User> {
+    const user = await this.appService.createUser(userSignUpDto);
+    if (!user) {
+      throw new ConflictException('Email already taken');
+    }
+    return user;
   }
 
   @Get('/current-user')
   getHello(): string {
-    return this.appService.getHello();
+    return 'Hello World!';
   }
 }
