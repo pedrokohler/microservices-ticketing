@@ -11,8 +11,7 @@ export class UserService {
   async createUser(userSignUpDto: UserSignUpDto): Promise<User> {
     const { email } = userSignUpDto;
 
-    const [existingUser] = await this.userModel.find({ email });
-
+    const existingUser = await this.findOneByEmail(email);
     if (existingUser) {
       return null;
     }
@@ -20,5 +19,10 @@ export class UserService {
     const user = new this.userModel(userSignUpDto);
 
     return user.save();
+  }
+
+  async findOneByEmail(email: string) {
+    const [user] = await this.userModel.find({ email });
+    return user;
   }
 }
