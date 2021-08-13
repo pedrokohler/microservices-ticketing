@@ -4,6 +4,7 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { PasswordModule } from './password/password.module';
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -16,7 +17,7 @@ import { UserModule } from './user/user.module';
     UserModule,
     PasswordModule,
   ],
-  controllers: [],
+  controllers: [AppController],
   providers: [
     {
       provide: APP_PIPE,
