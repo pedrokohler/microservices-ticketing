@@ -1,15 +1,25 @@
-import { Body, ConflictException, Controller, Get, Post } from '@nestjs/common';
+import {
+  Body,
+  ConflictException,
+  Controller,
+  Get,
+  Post,
+  Request,
+  UseGuards,
+} from '@nestjs/common';
 import { UserService } from './user.service';
 import { UserSignUpDto } from './dtos/user-sign-up.dto';
 import { User } from '../schemas/user.schema';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('api/users')
 export class UserController {
   constructor(private readonly appService: UserService) {}
 
+  @UseGuards(AuthGuard('local'))
   @Post('/sign-in')
-  signIn(): string {
-    return 'Hello World!';
+  async signIn(@Request() req) {
+    return req.user;
   }
 
   @Post('/sign-out')

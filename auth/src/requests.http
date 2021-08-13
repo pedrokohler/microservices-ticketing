@@ -5,11 +5,20 @@ Content-Type: application/json
 
 }
 
-###
+### Sign Up User
 POST http://ticketing.dev/api/users/sign-up
 Content-Type: application/json
 
 {
   "email": "pedrokohler1@gmail.com",
+  "password": "123456789"
+}
+
+### Sign In User
+POST http://ticketing.dev/api/users/sign-in
+Content-Type: application/json
+
+{
+  "username": "pedrokohler1@gmail.com",
   "password": "123456789"
 }
