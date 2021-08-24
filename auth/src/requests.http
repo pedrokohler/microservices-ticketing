@@ -22,3 +22,10 @@ Content-Type: application/json
   "username": "pedrokohler1@gmail.com",
   "password": "123456789"
 }
+
+### Sign Out User
+POST http://ticketing.dev/api/users/sign-out
+Content-Type: application/json
+
+### Who am I
+GET http://ticketing.dev/api/users/whoami

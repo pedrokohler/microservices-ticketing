@@ -5,6 +5,7 @@ import {
   Get,
   Post,
   Request,
+  Session,
   UseGuards,
 } from '@nestjs/common';
 import { UserService } from './user/user.service';
@@ -22,13 +23,22 @@ export class AppController {
 
   @UseGuards(AuthGuard('local'))
   @Post('/sign-in')
-  async signIn(@Request() req) {
-    return this.authService.login(req.user);
+  async signIn(@Request() req, @Session() session) {
+    const jwt = await this.authService.login(req.user);
+    session.jwt = jwt;
+    return 'Ok';
   }
 
   @Post('/sign-out')
-  signOut(): string {
-    return 'Hello World!';
+  signOut(@Session() session) {
+    session = null;
+    return 'Ok';
+  }
+
+  @UseGuards(AuthGuard('jwt'))
+  @Get('/whoami')
+  getCurrentUser(@Request() req) {
+    return req.user;
   }
 
   @Post('/sign-up')
