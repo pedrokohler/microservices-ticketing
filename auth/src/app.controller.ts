@@ -31,7 +31,7 @@ export class AppController {
 
   @Post('/sign-out')
   signOut(@Session() session) {
-    session = null;
+    delete session.jwt;
     return 'Ok';
   }
 
